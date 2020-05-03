@@ -1,0 +1,138 @@
+<html>
+    <head>
+        <title>To Do List</title>
+        <style type="text/css">
+body{
+  background-color: #4da6ff;
+  margin: auto 0;
+}
+
+
+ul{
+  margin: 0;
+  padding: 0;
+}
+ul li{
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  list-style-type: none;
+  background:#b3d9ff;
+  font-size: 18px;
+  transition: 0.2s;
+  border: 1px solid #0080ff;
+  border-radius: 5px;
+}
+ul li:hover{
+  background:#80bfff;
+}
+
+
+.close{
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+.close:hover{
+  background-color:#0066cc ;
+  color: white;
+}
+.header{
+  padding: 25px 25px;
+  text-align: center;
+}
+.header:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+input{
+  margin: 0;
+  border: 2px solid #0080ff;
+  width: 60%;
+  padding: 10px;
+  float: left;
+  margin-left: 10%;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.submit{
+  padding: 11px;
+  width: 15%;
+  background: #0080ff;
+  float: left;
+  margin-left: 20px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+.submit:hover{
+  background-color: #0066cc;
+}
+</style>
+    </head>
+    <body>
+<div class="container">
+	<div class="header">
+    	<h1>Create Your List!</h1>
+    	<input type="text" id="txt_add" placeholder="Create here...">
+    	<span onclick="newElement()" class="submit"><b>Submit</b></span>
+  	</div>
+  	<ul id="ul_list">
+  	</ul>
+</div>
+
+<script>
+	var myNodelist = document.getElementsByTagName("LI");
+	var i;
+	for (i = 0; i < myNodelist.length; i++) {
+  		var span = document.createElement("SPAN");
+  		var txt = document.createTextNode("\u00D7");
+  		span.className = "close";
+  		span.appendChild(txt);
+  		myNodelist[i].appendChild(span);
+	}
+	var close = document.getElementsByClassName("close");
+	var i;
+	for (i = 0; i < close.length; i++) {
+  		close[i].onclick = function() {
+    		var div = this.parentElement;
+    		div.style.display = "none";
+  		}
+	}
+	var list = document.querySelector('ul');
+	list.addEventListener('click', function(ev) {
+  		if (ev.target.tagName === 'LI') {
+    		ev.target.classList.toggle('checked');
+  		}
+	}, false);
+	function newElement() {
+  		var li = document.createElement("li");
+  		var inputValue = document.getElementById("txt_add").value;
+  		var t = document.createTextNode(inputValue);
+  		li.appendChild(t);
+  		if (inputValue === '') {
+    		alert("Please Input Your List!");
+  		} else {
+    		document.getElementById("ul_list").appendChild(li);
+  		}
+	document.getElementById("txt_add").value = "";
+	var span = document.createElement("SPAN");
+	var txt = document.createTextNode("\u00D7");
+	span.className = "close";
+	span.appendChild(txt);
+	li.appendChild(span);
+
+  	for (i = 0; i < close.length; i++) {
+	  close[i].onclick = function() {
+      	var div = this.parentElement;
+      	div.style.display = "none";
+    	}
+	}
+}
+</script>
+</body>
+</html>
